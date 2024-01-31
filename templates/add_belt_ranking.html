@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'add_belt_ranking' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add Belt Ranking">
+</form>
