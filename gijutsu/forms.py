@@ -38,3 +38,13 @@ class BeltRankingForm(forms.ModelForm):
             'martial_art': forms.Select(),
             'belt_color': forms.CheckboxSelectMultiple()
         }
+
+
+class MartialArtSearchForm(forms.Form):
+    name = forms.CharField(max_length=32, required=False)
+
+
+class TechniqueSearchForm(forms.Form):
+    name = forms.CharField(max_length=64, required=False)
+    technique_type = forms.ModelChoiceField(queryset=TechniqueType.objects.all(), empty_label=None)
+    martial_art = forms.ModelChoiceField(queryset=MartialArt.objects.all(), empty_label=None)

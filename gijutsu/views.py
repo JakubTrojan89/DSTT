@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView
 
-from gijutsu.forms import MartialArtForm, TechniqueTypeForm, TechniqueForm, BeltColorForm, BeltRankingForm
-from gijutsu.models import MartialArt, Technique
+from gijutsu.forms import MartialArtForm, TechniqueTypeForm, TechniqueForm, BeltColorForm, BeltRankingForm, \
+    MartialArtSearchForm, TechniqueSearchForm
+from gijutsu.models import MartialArt, Technique, TechniqueType
 
 
 class MainPageView(View):
@@ -25,6 +26,7 @@ class IndexView(View):
 
 class AddMartialArtView(View):
     template_name = 'add_martial_art.html'
+
     def get(self, request):
         form = MartialArtForm()
         return render(request, self.template_name, {'form': form})
@@ -38,8 +40,14 @@ class AddMartialArtView(View):
 
 
 class ListMartialArtView(ListView):
-    model = MartialArt
-    template_name = 'list_martial_art.html'
+    def get(self, request):
+        martial_arts = MartialArt.objects.all()
+        form = MartialArtSearchForm(request.GET)
+        if form.is_valid():
+            name = form.cleaned_data.get('name', '')
+            martial_arts = martial_arts.filter(name__icontains=name)
+
+        return render(request, 'list_view.html', {'object_list': martial_arts, 'form': form})
 
 
 class AddTechniqueTypeView(View):
@@ -58,6 +66,12 @@ class AddTechniqueTypeView(View):
         martial_arts = MartialArt.objects.all()
         return render(request, self.template_name, {'form': form})
 
+class ListTechniqueTypeView(ListView):
+
+    def get(self, request):
+        techniquetype = TechniqueType.objects.all()
+        return render(request, 'list_view.html', {'object_list': techniquetype})
+
 
 class AddTechniqueView(View):
     template_name = 'add_technique.html'
@@ -72,6 +86,16 @@ class AddTechniqueView(View):
             form.save()
             return render(request, self.template_name, {'message': "You've added a technique"})
         return render(request, self.template_name, {'form': form})
+
+
+class ListTechniqueView(ListView):
+    model = Technique
+    template_name = 'list_view.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['form'] = TechniqueSearchForm
+        return context
 
 
 class AddBeltColorView(View):
