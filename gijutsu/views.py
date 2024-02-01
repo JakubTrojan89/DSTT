@@ -9,19 +9,13 @@ from gijutsu.models import MartialArt, Technique, TechniqueType
 
 class MainPageView(View):
     def get(self, request):
-        return render(request, 'base.html')
+        return render(request, 'index.html')
 
 
 class MartialArtView(View):
     def get(self, request):
         martial_art = ['BJJ', 'Submission Grappling', 'Wrestling', 'Judo']
         return render(request, 'martial_art.html', {'martial_art': martial_art})
-
-
-class IndexView(View):
-    def get(self, request):
-        lst = ['bjj', 'submission grappling', 'wrestling', 'judo']
-        return render(request, 'index.html', {'lista':lst})
 
 
 class AddMartialArtView(View):
@@ -35,7 +29,8 @@ class AddMartialArtView(View):
         form = MartialArtForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, self.template_name, {'message': "You've added a martial art, thank you!"})
+            message = "You've added a martial art, thanks!"
+            return render(request, self.template_name, {'message': message})
         return render(request, self.template_name, {'form': form})
 
 
@@ -96,6 +91,18 @@ class ListTechniqueView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['form'] = TechniqueSearchForm
         return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = TechniqueSearchForm(self.request.GET)
+        if form.is_valid():
+            name = form.cleaned_data['title']
+            technique_type = form.cleaned_data['technique_type']
+            martial_art = form.cleaned_data['martial_art']
+            queryset = queryset.filter(name__icontains=name)
+            if name is not None:
+                queryset = queryset.filter(name=name)
+        return queryset
 
 
 class AddBeltColorView(View):

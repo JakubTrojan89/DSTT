@@ -1,12 +1,5 @@
-<form method="post" action="{% url 'add_technique_type' %}">
+<form method="post" action="{% url 'att' %}">
     {% csrf_token %}
     {{ form.as_p }}
-
-    <select name="martial_art">
-        {% for martial_art in martial_arts %}
-            <option value="{{ martial_art.id }}">{{ martial_art.name }}</option>
-        {% endfor %}
-    </select>
-
     <input type="submit" value="Add Technique Type">
 </form>

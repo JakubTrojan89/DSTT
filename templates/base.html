@@ -1,16 +1,18 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>DSTT</title>
+    <link href="{% static '/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-5.3.2-dist/css/bootstrap.css' %}">
+    <script src={% static 'bootstrap-5.3.2-dist/js/bootstrap.bundle.js' %}></script>
 </head>
 <body>
-<ul>
-    <li>Don't</li>
-    <li>Sweat</li>
-    <li>The</li>
-    <li>Technique</li>
-</ul>
+    Don't Sweat The Technique
+<div>
+    <img src="{% static 'bjj_yin_yang.jpg' %}">
+</div>
 {% block content %}
     The more you fuck around the more you find out
 {% endblock %}
