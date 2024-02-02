@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.models import User
 from django.views.generic import ListView
 
 from gijutsu.forms import MartialArtForm, TechniqueTypeForm, TechniqueForm, BeltColorForm, BeltRankingForm, \
-    MartialArtSearchForm, TechniqueSearchForm
+    MartialArtSearchForm, TechniqueSearchForm, MartialArtLegendForm
 from gijutsu.models import MartialArt, Technique, TechniqueType
 
 
@@ -34,7 +35,7 @@ class AddMartialArtView(View):
         return render(request, self.template_name, {'form': form})
 
 
-class ListMartialArtView(ListView):
+class ListMartialArtView(View):
     def get(self, request):
         martial_arts = MartialArt.objects.all()
         form = MartialArtSearchForm(request.GET)
@@ -61,7 +62,7 @@ class AddTechniqueTypeView(View):
         martial_arts = MartialArt.objects.all()
         return render(request, self.template_name, {'form': form})
 
-class ListTechniqueTypeView(ListView):
+class ListTechniqueTypeView(View):
 
     def get(self, request):
         techniquetype = TechniqueType.objects.all()
@@ -72,13 +73,15 @@ class AddTechniqueView(View):
     template_name = 'add_technique.html'
 
     def get(self, request):
-        form = TechniqueForm
+        form = TechniqueForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         form = TechniqueForm(request.POST)
         if form.is_valid():
-            form.save()
+            martial_art = form.cleaned_data['martial_art']
+            technique = form.save()
+            technique.martial_art.set(martial_art)
             return render(request, self.template_name, {'message': "You've added a technique"})
         return render(request, self.template_name, {'form': form})
 
@@ -103,6 +106,12 @@ class ListTechniqueView(ListView):
             if name is not None:
                 queryset = queryset.filter(name=name)
         return queryset
+
+
+class DetailTechniqueView(View):
+
+    def get(self, request, pk):
+        pass
 
 
 class AddBeltColorView(View):
@@ -133,3 +142,39 @@ class AddBeltRankingView(View):
             form.save()
             return render(request, 'add_belt_ranking.html', {'message': "You've added a belt ranking, thank you!"})
         return render(request, self.template_name, {'form': form})
+
+
+class AddMartialArtLegendView(View):
+    template_name = 'add_martial_art_legend.html'
+
+    def get(self, request):
+        form = MartialArtLegendForm
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = MartialArtLegendForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'add_martial_art_legend.html')
+        return render(request, self.template_name, {'form': form})
+
+
+class BJJView(View):
+    def get(self, request):
+        return render(request, 'bjj.html')
+
+
+class JudoView(View):
+    def get(self, request):
+        return render(request, 'judo.html')
+
+
+class WrestlingView(View):
+    def get(self, request):
+        return render(request, 'wrestling.html')
+
+
+class SubmissionView(View):
+    def get(self, request):
+        return render(request, 'submission.html')
+
