@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technique Detail</title>
+</head>
+<body>
+    <h1>Technique Detail</h1>
+    <p><strong>Name:</strong> {{ technique.name }}</p>
+    <p><strong>Description:</strong> {{ technique.description }}</p>
+    <a href="{%  url 'add_comment' technique_pk=technique.pk %}">add comment</a>
+    <ul class="list-group">
+        {% for comment in technique.comment_set.all %}
+            <li class="list-group-item">{{ comment.text }}
+            <a href="{% url 'edit_comment' comment.id %}">edit</a>
+            </li>
+        {% endfor %}
+
+    </ul>
+</body>
+</html>

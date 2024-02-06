@@ -1,7 +1,7 @@
 from django import forms, models
 from django.forms import widgets
 
-from gijutsu.models import MartialArt, TechniqueType, Technique, BeltColor, BeltRanking
+from gijutsu.models import MartialArt, TechniqueType, Technique, BeltColor, BeltRanking, Comment
 
 
 class MartialArtForm(forms.ModelForm):
@@ -60,3 +60,8 @@ class MartialArtLegendForm(forms.Form):
         pass
 
 
+class AddCommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ['text']

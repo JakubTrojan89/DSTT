@@ -1,19 +1,21 @@
 <div class="container-fluid">
-    <a class="navbar-brand" href="#page-top">Hello {% if user.is_authenticated %}
-        <ul>
-            <li>{{ user.username }}</li>
-        </ul>
-    {% else %}
-        stranger
-    {% endif %}</a>
-    <button class="btn btn-primary" id="sidebarToggle">Wanna learn some cool shit?</button>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-icon"></span></button>
+    <a class="navbar-brand" href="#page-top">
+        Hello,
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            stranger
+        {% endif %}
+    </a>
+    {% if user.is_authenticated %}
+        <button class="btn btn-primary" id="logoutButton" onclick="location.href='{% url 'logout_view' %}';">Log out</button>
+    {% endif %}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-            <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#!">Grading</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_technique' %}">Add Technique</a></li>
+            {% endif %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Sign In</a>
@@ -21,8 +23,11 @@
                     <a class="dropdown-item" href="{% url 'register_view' %}">Register</a>
                     <a class="dropdown-item" href="#!">About</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'login_view' %}">Log in</a>
-                    <a class="dropdown-item" href="{% url 'logout_view' %}">Log out</a>
+                    {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="">User Panel</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'login_view' %}">Log in</a>
+                    {% endif %}
                 </div>
             </li>
         </ul>

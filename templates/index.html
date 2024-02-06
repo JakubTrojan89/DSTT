@@ -9,7 +9,6 @@
         <title>DSTT - Don't Sweat The Technique</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
     <body>
@@ -22,7 +21,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'list_technique_type' %}">Technique Types</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'list_technique' %}">Techniques</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'add_belt_ranking' %}">Belt Ranking</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Martial Art Legends</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'list_legend' %}">Martial Art Legends</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Ways to improve</a>
                 </div>
             </div>
@@ -40,6 +39,7 @@
                         determined by your last fight, we won't post your tech if we don't find you qualified.
                         A straightforward test will evaluate your skillset. Oss!
                     </p>
+                    <img src="{% static 'css/bjj_art.jpg' %}" alt="Oni-triangle-choke"/>
                 </div>
             </div>
         </div>

@@ -1,31 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>DSTT - Don't Sweat The Technique</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <div class="list-group">
-        <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-light">DSTT</div>
-            <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                   href="{% url 'bjj' %}">BJJ</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                   href="{% url 'wrestling' %}">Wrestling</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                   href="{% url 'judo' %}">Judo</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"
-                   href="{% url 'submission_grappling' %}">Submission Grappling</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" 
-                   href="{% url 'submission_grappling' %}">Sambo</a>
-            </div>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>DSTT - Don't Sweat The Technique</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    {% include 'navbar.html' %}
+</nav>
+
+<div class="list-group">
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">DSTT</div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+               href="{% url 'bjj' %}">BJJ</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+               href="{% url 'wrestling' %}">Wrestling</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+               href="{% url 'judo' %}">Judo</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+               href="{% url 'submission_grappling' %}">Submission Grappling</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+               href="{% url 'submission_grappling' %}">Sambo</a>
         </div>
     </div>
+</div>
+</body>

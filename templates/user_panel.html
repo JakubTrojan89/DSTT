@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Panel</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    .user-panel {
+        width: 300px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+    }
+
+    .user-panel h2 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .user-info {
+        margin-bottom: 20px;
+    }
+
+    .user-info p {
+        margin: 5px 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .action-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .action-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="user-panel">
+    <h2>User Panel</h2>
+    <div class="user-info">
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> john@example.com</p>
+        <p><strong>Role:</strong> Administrator</p>
+    </div>
+    <div class="action-buttons">
+        <button class="action-button">Edit Profile</button>
+        <button class="action-button">Change Password</button>
+    </div>
+</div>
+
+</body>
+</html>
