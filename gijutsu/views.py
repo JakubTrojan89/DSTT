@@ -22,7 +22,7 @@ class MartialArtView(View):
         return render(request, 'martial_art.html', {'martial_art': martial_art})
 
 
-class AddMartialArtView(LoginRequiredMixin, View):
+class AddMartialArtView(View):
     template_name = 'add_martial_art.html'
 
     def get(self, request):

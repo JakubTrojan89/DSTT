@@ -1,5 +1,42 @@
-<form method="post" action="{% url 'add_belt_ranking' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Add Belt Ranking">
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>DSTT - Don't Sweat The Technique</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}"/>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        {% include 'navbar.html' %}
+    </nav>
+    <h2>Add Belt Ranking</h2>
+    <form method="POST" action="{% url 'add_belt_ranking' %}">
+        {% csrf_token %}
+        <label for="belt_color">Belt Color:</label><br>
+        <input type="text" id="belt_color" name="belt_color"><br>
+        
+        <label for="martial_art">Martial Art:</label><br>
+        <select id="martial_art" name="martial_art">
+            {% for martial_art in martial_arts %}
+                <option value="{{ martial_art.id }}">{{ martial_art.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="techniques">Techniques:</label><br>
+        <select multiple id="techniques" name="techniques">
+            {% for technique in techniques %}
+                <option value="{{ technique.id }}">{{ technique.name }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+    <script src="{% static 'bootstrap-5.3.2-dist/js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
