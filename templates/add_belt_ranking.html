@@ -17,16 +17,20 @@
     <h2>Add Belt Ranking</h2>
     <form method="POST" action="{% url 'add_belt_ranking' %}">
         {% csrf_token %}
-        <label for="belt_color">Belt Color:</label><br>
-        <input type="text" id="belt_color" name="belt_color"><br>
-        
         <label for="martial_art">Martial Art:</label><br>
         <select id="martial_art" name="martial_art">
             {% for martial_art in martial_arts %}
                 <option value="{{ martial_art.id }}">{{ martial_art.name }}</option>
             {% endfor %}
         </select><br>
-
+    
+        <label for="belt_color">Belt Color:</label><br>
+        <select id="belt_color" name="belt_color">
+            {% for belt_color in available_belt_colors %}
+                <option value="{{ belt_color }}">{{ belt_color }}</option>
+            {% endfor %}
+        </select><br>
+        
         <label for="techniques">Techniques:</label><br>
         <select multiple id="techniques" name="techniques">
             {% for technique in techniques %}

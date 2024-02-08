@@ -13,6 +13,7 @@ urlpatterns = [
     path('listtechnique/', views.ListTechniqueView.as_view(), name='list_technique'),
     path('detailtechnique/<int:pk>', views.DetailTechniqueView.as_view(), name='detail_technique'),
     path('addbeltranking/', views.AddBeltRankingView.as_view(), name='add_belt_ranking'),
+    path('listbeltranking/', views.ListBeltRankingView.as_view(), name='list_belt_ranking'),
     path('addbeltcolor/', views.AddBeltColorView.as_view(), name='add_belt_color'),
     path('bjj/', views.BJJView.as_view(), name='bjj'),
     path('judo/', views.JudoView.as_view(), name='judo'),

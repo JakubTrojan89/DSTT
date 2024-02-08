@@ -14,10 +14,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     {% include 'navbar.html' %}
 </nav>
-<h1>Martial Art Legends</h1>
+<h1>Belt Ranking</h1>
 <ul>
-    {% for legend in legends %}
-        <li>{{ legend.first_name }} {{ legend.last_name }} - {{ legend.martial_art }}</li>
+    {% for belt_ranking in belt_rankings %}
+        <li>{{ belt_ranking.martial_art }} - {{ belt_ranking.belt_color }} - </li>
     {% endfor %}
 </ul>
 <script src="{% static 'bootstrap-5.3.2-dist/js/bootstrap.bundle.js' %}"></script>

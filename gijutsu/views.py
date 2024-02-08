@@ -8,7 +8,7 @@ from django.views.generic import ListView, UpdateView
 
 from gijutsu.forms import MartialArtForm, TechniqueTypeForm, TechniqueForm, BeltColorForm, BeltRankingForm, \
     MartialArtSearchForm, TechniqueSearchForm, MartialArtLegendForm, AddCommentForm
-from gijutsu.models import MartialArt, Technique, TechniqueType, Comment, MartialArtLegends
+from gijutsu.models import MartialArt, Technique, TechniqueType, Comment, MartialArtLegends, BeltRanking
 
 
 class MainPageView(View):
@@ -149,18 +149,26 @@ class AddBeltRankingView(View):
         return render(request, self.template_name, {'form': form})
 
 
+class ListBeltRankingView(View):
+    template_name = 'list_belt_ranking.html'
+
+    def get(self, request):
+        belt_ranking = BeltRanking.objects.all()
+        return render(request, self.template_name, {'belt_ranking': belt_ranking})
+
+
 class AddMartialArtLegendView(View):
     template_name = 'add_martial_art_legend.html'
 
     def get(self, request):
-        form = MartialArtLegendForm
+        form = MartialArtLegendForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         form = MartialArtLegendForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'add_martial_art_legend.html')
+            return redirect('list_legend')
         return render(request, self.template_name, {'form': form})
 
 
@@ -185,8 +193,8 @@ class AddCommentView(View):
             comment.technique = Technique.objects.get(pk=technique_pk)
             comment.martial_art = self.request.user
             comment.save()
-            return redirect('detail_book', args=(technique_pk, ))
-        return render(request, 'add_technique.html', {'form': form})
+            return redirect('main', args=(technique_pk, ))
+        return render(request, 'index.html', {'form': form})
 
 
 class EditCommentView(UserPassesTestMixin, UpdateView):

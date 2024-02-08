@@ -1,7 +1,7 @@
 from django import forms, models
 from django.forms import widgets
 
-from gijutsu.models import MartialArt, TechniqueType, Technique, BeltColor, BeltRanking, Comment
+from gijutsu.models import MartialArt, TechniqueType, Technique, BeltColor, BeltRanking, Comment, MartialArtLegends
 
 
 class MartialArtForm(forms.ModelForm):
@@ -36,8 +36,8 @@ class BeltRankingForm(forms.ModelForm):
         model = BeltRanking
         fields = ['belt_color', 'martial_art', 'technique']
         widgets = {
-            'martial_art': forms.Select(),
-            'belt_color': forms.CheckboxSelectMultiple()
+            'martial_art': forms.Select(attrs={'class': 'form-select'}),
+            'belt_color': forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'})
         }
 
 
@@ -51,13 +51,10 @@ class TechniqueSearchForm(forms.Form):
     martial_art = forms.ModelChoiceField(queryset=MartialArt.objects.all(), empty_label=None)
 
 
-class MartialArtLegendForm(forms.Form):
-    first_name = forms.CharField(max_length=64)
-    last_name = forms.CharField(max_length=64)
-    martial_art = forms.ModelChoiceField(queryset=MartialArt.objects.all(), empty_label=None)
-
-    def save(self):
-        pass
+class MartialArtLegendForm(forms.ModelForm):
+    class Meta:
+        model = MartialArtLegends
+        fields = ['first_name', 'last_name', 'martial_art']
 
 
 class AddCommentForm(forms.ModelForm):
